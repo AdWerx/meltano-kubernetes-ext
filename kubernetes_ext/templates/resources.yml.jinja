@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: any
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: meltano
+              resources:
+                requests:
+                  cpu: "1"
+                  ephemeral-storage: 1Gi
+                  memory: 4Gi
+                limits:
+                  cpu: "1"
+                  ephemeral-storage: 1Gi
+                  memory: 4Gi

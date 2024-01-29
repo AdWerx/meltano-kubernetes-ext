@@ -1,0 +1,10 @@
+commonLabels:
+{%- for key, value in commonLabels | dictsort %}
+  {{ key | tojson }}: {{ value | tojson }}
+{%- endfor %}
+resources:
+{%- for schedule in schedules %}
+  - {{ schedule['name'] }}-cron-job.yml
+{%- endfor %}
+configMapGenerator:
+  - name: env

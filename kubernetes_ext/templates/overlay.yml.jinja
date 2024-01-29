@@ -1,0 +1,12 @@
+commonAnnotations: {}
+commonLabels: {}
+resources:
+  - ../../base
+patchesStrategicMerge:
+  - env-config-map.yml
+patches:
+  - path: resources.yml
+    target:
+      kind: CronJob
+      # limit / scope to a certain job(s) with a labelSelector
+      # labelSelector: "meltano.kubernetes.io/job=somejob"
