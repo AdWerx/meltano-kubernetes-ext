@@ -126,18 +126,6 @@ class Kubernetes(ExtensionBase):
         """
         raise NotImplementedError
 
-    def list(self) -> None:
-        v1 = client.BatchV1Api()
-        ret = v1.list_namespaced_cron_job(
-            namespace=self.namespace,
-            pretty=True,
-            label_selector=self.label_selector,
-        )
-        for i in ret.items:
-            print("%s\t%s\t%s" % (i.status, i.metadata.namespace, i.metadata.name))
-        if not ret.items:
-            print(f"No resources found in {self.namespace} namespace")
-
     def _clear_destination(self, destination: Path) -> None:
         if not self.meltano_project_dir in destination.parents:
             return
