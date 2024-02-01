@@ -24,6 +24,7 @@ spec:
                 sizeLimit: 1Gi
           containers:
             - name: meltano
+              image: meltano
               command:
                 - meltano
                 - {{ cmd }}
