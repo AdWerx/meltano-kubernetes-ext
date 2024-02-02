@@ -170,6 +170,7 @@ class Kubernetes(ExtensionBase):
             }
             if schedule.get("job"):
                 labels["meltano.kubernetes.io/job"] = schedule["job"]["name"]
+            labels["meltano.kubernetes.io/schedule"] = schedule["name"]
             template = self.env.get_template("cron-job.yml.jinja")
             template.stream(
                 {
