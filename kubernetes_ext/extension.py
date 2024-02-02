@@ -106,7 +106,9 @@ class Kubernetes(ExtensionBase):
                 args = [schedule["job"]["name"]]
             else:
                 cmd = "elt"
-                args = schedule["elt_args"]
+                args = (
+                    arg for arg in schedule["elt_args"] if arg != "--transform=None"
+                )
             jobs.append(
                 {
                     **schedule,
