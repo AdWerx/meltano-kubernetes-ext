@@ -203,7 +203,7 @@ resources:
   - ../../base
 patches:
   - env-config-map.yml
-``
+```
 
 ## Contributing
 
