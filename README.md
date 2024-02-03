@@ -205,6 +205,29 @@ patches:
   - env-config-map.yml
 ```
 
+## Deploying
+
+To deploy the manifests and overlay to the cluster, use `kubectl apply -k orchestrate/kubernetes/overlays/production` where `production` is the overlay you would like to render and deploy.
+
+### Continuous Deployment
+
+If you're continuously building a container image and rendering manifests based on the meltano project files therein, you can use the following steps to do so:
+
+- `docker build ...` or build/push your container in any method
+- `meltano --environment production invoke kubernetes render` to render the manifests base layer to `orchestrate/kubernetes/base`
+- Write the image name and tag that was just built to the overlay kustomization.yml
+
+```
+echo '
+images:
+  - name: meltano
+    newName: myregistry.io/myorg/myimage
+    newTag: xyz123
+' | tee -a ./orchestrate/kubernetes/overlays/production/kustomization.yml
+```
+
+- Apply the manifests `kubectl apply -k ./orchestrate/kubernetes/overlays/production`
+
 ## Contributing
 
 1. Install the project dependencies with `poetry install`:
